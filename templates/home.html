@@ -1,0 +1,30 @@
+<nav class="w3-sidenav w3-collapse w3-white w3-card-2 w3-animate-left" style="width:250px;" id="mySidenav">
+  <div class="w3-container {{setTheme}}" style="height:210px;"></div>
+  <a href="javascript:void(0)" ng-click="w3_close()"
+  class="w3-closenav w3-large w3-hide-large">Close &times;</a>
+  <a href="#">Link 1</a>
+  <a href="#">Link 2</a>
+  <a href="#">Link 3</a>
+  <a href="#">Link 4</a>
+  <a href="#">Link 5</a>
+  <a ng-repeat="menu in sideMenu" ng-href="menu.link">{{menu.menu}}</a>
+</nav>
+
+
+<div class="w3-main" style="margin-left:250px">
+<header class="w3-container {{setTheme}}">
+  <span class="w3-opennav w3-xlarge w3-hide-large" ng-click="w3_open()">&#9776;</span>
+  <h2>Responsive Sidenav</h2>
+</header>
+
+<div class="w3-container">
+  <!-- isi -->
+  <div ng-include=""></div>
+</div>
+
+<footer class="w3-container {{setTheme}}">
+  <h5>Footer</h5>
+  <p>Footer information goes here</p>
+</footer>
+
+</div>
