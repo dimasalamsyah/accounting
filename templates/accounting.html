@@ -12,40 +12,46 @@
       </select>
     </p>
 
-    <div data-ng-app="" data-ng-init="accounting.begin=10; accounting.in=0; accounting.out=0;">
+    <!-- <div data-ng-app="" data-ng-init="accounting.begin=10; accounting.in=0; accounting.out=0;"> -->
 
     <!-- <label class="w3-label">Begin</label>
     <input class="w3-input" type="number" ng-model="accounting.begin"> -->
-    <label class="w3-label" ng-model="accounting.ending">Begin: {{accounting.begin}}</label>
+    <!-- <label class="w3-label" ng-model="">Begin: {{accounting.begin}}</label> -->
     <p></p>
 
+    <label class="w3-label">Begin</label>
+    <input class="w3-input" type="number" ng-model="accounting.begin">
+
     <label class="w3-label">In</label>
-    <input class="w3-input" type="number" ng-model="accounting.masuk">
+    <input class="w3-input" type="number" ng-model="accounting.in_" ng-change="calEnding(accounting.begin, accounting.in_, accounting.out)">
+
     <label class="w3-label">Out</label>
-    <input class="w3-input" type="number" ng-model="accounting.out">
+    <input class="w3-input" type="number" ng-model="accounting.out" ng-change="calEnding(accounting.begin, accounting.in_, accounting.out)">
+
     <label class="w3-label">Ending</label>
-    <input class="w3-input" type="number" ng-model="accounting.ending" ng-value="{{ending}}">
+    <input class="w3-input" type="number" ng-model="accounting.ending">
+
     <label class="w3-label">Start At</label>
-    <input class="w3-input" type="text" ng-model="accounting.startAt" ng-value="{{startAt}}">
+    <input class="w3-input" type="text" ng-model="accounting.startAt">
+
     <label class="w3-label">Update At</label>
-    <input class="w3-input" type="text" ng-model="accounting.updateAt" ng-value="{{updateAt}}">
-    
+    <input class="w3-input" type="text" ng-model="accounting.updateAt">
+
     <p></p>
-    <label class="w3-label">Ending: {{(accounting.begin + accounting.in) - accounting.out}}</label>
+    <label class="w3-label">Ending: {{outValEnding}}</label>
     <p></p>
 
     <label class="w3-label w3-col m6" >Start At: {{ today | date :  "dd/MM/y HH:mm:ss" }}</label>
     <label class="w3-label w3-col m6" >Update At: {{ today | date :  "dd/MM/y HH:mm:ss" }}</label>
 
-    <label for="MyField">aa</label>
-    <input type="text" size="40" id="MyField" ng-model="myField" ng-value="a"/>
 
 
     <div class="w3-col m10 l11 w3-container">
       <!-- <button class="w3-btn {{setTheme}}" style="margin-left:0px" ng-click="submit(accounting)">Submit1</button> -->
+      <p><button class="w3-btn {{setTheme}}" style="margin-left:-15px;" ng-click="submit(accounting)">Submit</button></p>
     </div>
     <!-- <div class="w3-col m2 l2 w3-container w3-red" style=""> -->
-      <p class="w3-col m2 l1"><button class="w3-btn {{setTheme}}" style="" ng-click="submit(accounting)">Submit</button></p>
+      <p class="w3-col m2 l1" style="margin-left:0px;"></p>
     <!-- </div> -->
   </form>
 
