@@ -62,7 +62,7 @@ app.controller("accountingCtrl", function($scope, MyService, account) {
 
     $scope.submit = function(accounting){
       account.create(accounting);
-      
+
       //console.log($scope.accounting.ending);
       console.log(accounting);
 
@@ -92,7 +92,7 @@ app.controller("indexCtrl", function($scope, MyService, account) {
 });
 
 
-app.controller("accountingDetailCtrl", function($scope, MyService, account, $firebase, $routeParams) {
+app.controller("accountingDetailCtrl", function($scope, MyService, account, $firebase, $routeParams, $location) {
 
   $scope.header = "Accounting Detail";
   $scope.footer = footer_set;
@@ -106,13 +106,12 @@ app.controller("accountingDetailCtrl", function($scope, MyService, account, $fir
   //   console.log(accounting);
   // }
 
-  $scope.deleteItem = function(cc, key){
+  $scope.deleteItem = function(id, key){
     // itemRef = new Firebase('https://studystupid-49162.firebaseio.com/accounting/');
-    
-    // //$scope.get_account.$remove(id);
-    
-    //console.log($routeParams);
-    
+
+    $scope.get_account.$remove(id);
+    console.log(id);
+
     // var getKey = itemRef.key();
 
     // console.log($firebase(itemRef.child('accounting').child(id)).$asObject());
@@ -123,14 +122,18 @@ app.controller("accountingDetailCtrl", function($scope, MyService, account, $fir
     // itemRef.update({
     //   begin: "2210"
     // });
-   
+
   //console.log($routeParams);
 
 
   }
 
+  $scope.editItem = function() {
+    $location.path("/edit");
+  }
+
   // $scope.editItem = function(item){
-    
+
   //   $firebase(itemRef).$set({
   //       id: item.id,
   //       name : item.name,
@@ -149,7 +152,7 @@ app.controller('aboutCtrl', function($scope, MyService, $routeParams, $firebase,
   var users = MyService;
 
   $scope.user = new Firebase(userUrl);
-  
+
   $scope.updateUser = function () {
 
     // var names = [];
@@ -166,7 +169,12 @@ app.controller('aboutCtrl', function($scope, MyService, $routeParams, $firebase,
 
 });
 
+app.controller("accountingDetailEditCtrl", function($scope, MyService, account, $location) {
+  $scope.setTheme = MyService.setTheme;
+  //$location.path("/edit");
 
+
+});
 
 app.factory('account', ['$firebase',
   function($firebase) {

@@ -7,13 +7,13 @@
   <table class="w3-table w3-striped w3-border w3-card-4 w3-hoverable">
     <thead>
     <tr class="{{setTheme}}">
-      <th>Begin</th>
-      <th>In</th>
-      <th>Out</th>
-      <th>Ending</th>
-      <th>Note</th>
+      <th style="width:10%">Begin</th>
+      <th style="width:10%">In</th>
+      <th style="width:10%">Out</th>
+      <th style="width:10%">Ending</th>
+      <th style="width:25%">Note</th>
       <th>Date</th>
-      <th colspan="2">Action</th>
+      <th colspan="2" style="width:10%">Action</th>
 
     </tr>
     </thead>
@@ -27,11 +27,13 @@
       <td>{{ account.updateAt }}</td>
       <!-- <td>{{ account.$id }}</td> -->
       <td>
-          <button class="w3-btn w3-red" style="" ng-click="Edit(account.$id)">
+          <button class="w3-btn w3-red" style="" ng-click="editItem(account.$id)">
             <i class="fa fa-pencil"></i>
           </button>
       </td>
-      <td><button class="w3-btn w3-red" style="" ng-click="deleteItem(account, key)">Remove</button></td>
+      <td><button class="w3-btn w3-red" style="" ng-click="deleteItem(account, key)">
+        <i class="fa fa-times"></i>
+      </button></td>
     </tr>
 
   </table>

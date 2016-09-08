@@ -43,11 +43,15 @@ app.config(function($routeProvider) {
         templateUrl : "templates/accounting_detail.html",
         controller : "accountingDetailCtrl"
     })
+    .when("/edit", {
+        templateUrl : "templates/accounting_detail_edit.html",
+        controller : "accountingDetailEditCtrl"
+    })
     .when("/about", {
         templateUrl : "templates/about.html",
         controller : "aboutCtrl"
     })
-    $routeProvider.otherwise({redirectTo: '/login'})
+    //$routeProvider.otherwise({redirectTo: '/login'})
 
     ;
 });
