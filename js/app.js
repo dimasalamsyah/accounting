@@ -6,6 +6,9 @@ var monthNames = [
   "August", "September", "October",
   "November", "December"
 ];
+
+var footer_set = "&copy Dimas Alamsyah";
+
 var date = new Date();
 var day = date.getDate();
 var monthIndex = date.getMonth();
@@ -36,9 +39,15 @@ app.config(function($routeProvider) {
         templateUrl : "templates/accounting.html",
         controller : "accountingCtrl"
     })
+    .when("/accounting-detail", {
+        templateUrl : "templates/accounting_detail.html",
+        controller : "accountingDetailCtrl"
+    })
     .when("/about", {
         templateUrl : "templates/about.html",
         controller : "aboutCtrl"
     })
+    $routeProvider.otherwise({redirectTo: '/login'})
+
     ;
 });

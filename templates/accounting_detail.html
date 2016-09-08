@@ -1,0 +1,45 @@
+<div class="w3-row">
+  <div class="w3-container {{setTheme}}">
+    <h2>{{header}}</h2>
+  </div>
+
+<p>
+  <table class="w3-table w3-striped w3-border w3-card-4 w3-hoverable">
+    <thead>
+    <tr class="{{setTheme}}">
+      <th>Begin</th>
+      <th>In</th>
+      <th>Out</th>
+      <th>Ending</th>
+      <th>Note</th>
+      <th>Date</th>
+      <th colspan="2">Action</th>
+
+    </tr>
+    </thead>
+
+    <tr ng-repeat="(key, account) in get_account">
+      <td>{{ account.begin }}</td>
+      <td>{{ account.in_ }}</td>
+      <td>{{ account.out }}</td>
+      <td>{{ account.ending }}</td>
+      <td>{{ account.note }}</td>
+      <td>{{ account.updateAt }}</td>
+      <!-- <td>{{ account.$id }}</td> -->
+      <td>
+          <button class="w3-btn w3-red" style="" ng-click="Edit(account.$id)">
+            <i class="fa fa-pencil"></i>
+          </button>
+      </td>
+      <td><button class="w3-btn w3-red" style="" ng-click="deleteItem(account, key)">Remove</button></td>
+    </tr>
+
+  </table>
+</p>
+
+  <footer class="w3-col m12 w3-container {{setTheme}}" style="height:40px;">
+    <center><quote><h6>{{footer}}</h6></quote></center>
+  </footer>
+
+
+</div>

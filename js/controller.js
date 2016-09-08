@@ -2,7 +2,7 @@
 
 app.controller("homeCtrl", function($scope, MyService, $location) {
   $scope.header = "Login";
-  $scope.footer = "&copyDimas Alamsyah";
+  $scope.footer = footer_set;
   $scope.setTheme = MyService.setTheme;
   $scope.sideNav = MyService.sideNav;
   //$scope.items = sideMenu;
@@ -16,7 +16,7 @@ app.controller("homeCtrl", function($scope, MyService, $location) {
 
 app.controller("loginCtrl", function($scope, MyService, $location) {
   $scope.header = "Login";
-  $scope.footer = "&copyDimas Alamsyah";
+  $scope.footer = footer_set;
   $scope.setTheme = MyService.setTheme;
 
   $scope.login = function(user){
@@ -36,55 +36,46 @@ app.controller("headerCtrl", function($scope, MyService) {
 });
 
 app.controller("accountingCtrl", function($scope, MyService, account) {
+
   $scope.header = "Accounting";
-  $scope.footer = "&copy Dimas Alamsyah";
+  $scope.footer = footer_set;
   $scope.setTheme = MyService.setTheme;
 
-  $scope.today = new Date();
+  $scope.calEnding = function(begin, in_, out_){
+    $scope.outValEnding = MyService.setValEnding(begin, in_, out_);
 
-  //$scope.startAt = "today | date :  'dd/MM/y HH:mm:ss'";
-// var setbegin = $scope.accounting.begin;
-// var setin_ = $scope.accounting.in_;
-// var setout = $scope.accounting.out;
-// var setEnding = (setbegin + setin_) - setout;
-// $scope.addItem = function(params) {
-//   alert(params.name);
-//   alert(params.qty);
-// };
-var getValue;
-$scope.calEnding = function(begin, in_, out_){
- var getValue = $scope.outValEnding = MyService.setValEnding(begin, in_, out_);
- // $scope.accounting = {
- //   ending:  getValue
- // }
-}
+    $scope.accounting.ending = MyService.setValEnding(begin, in_, out_);
 
-$scope.accounting = {
-    begin: 0,
-    in_: 0,
-    out: 0,
-    ending: getValue,
-    startAt: getDete,
-    updateAt: getDete
- };
-   //$scope.outValEnding = 0;
-
-
-
-  //$scope.ending = $scope.accounting.masuk + $scope.accounting.out;
-
-  $scope.submit = function(accounting){
-    account.create(accounting);
-    console.log($scope.accounting.ending);
-    console.log(accounting);
-    //console.log(day + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + hour +':'+ minute);
   }
 
+  $scope.accounting = {
+      begin: 0,
+      in_: 0,
+      out: 0,
+      ending: 0,
+      startAt: getDete,
+      updateAt: getDete
+   };
+
+  $scope.outValEnding = 0;
+  $scope.today = new Date();
+
+    $scope.submit = function(accounting){
+      account.create(accounting);
+      
+      //console.log($scope.accounting.ending);
+      console.log(accounting);
+
+      //console.log(day + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + hour +':'+ minute);
+    }
+
 });
 
-app.controller("aboutCtrl", function($scope, MyService) {
+// app.controller("aboutCtrl", function($scope, MyService) {
 
-});
+
+
+// });
 
 app.controller("indexCtrl", function($scope, MyService, account) {
   $scope.setTheme = MyService.setTheme;
@@ -92,13 +83,90 @@ app.controller("indexCtrl", function($scope, MyService, account) {
   $scope.sideMenu = [
       {menu: 'Login', link: 'login'},
       {menu: 'Accounting', link: 'accounting'},
+      {menu: 'Accounting Detail', link: 'accounting-detail'},
       {menu: 'About', link: 'about'},
       {menu: 'Logout', link: 'logout'}
   ];
 
 
+});
+
+
+app.controller("accountingDetailCtrl", function($scope, MyService, account, $firebase, $routeParams) {
+
+  $scope.header = "Accounting Detail";
+  $scope.footer = footer_set;
+  $scope.setTheme = MyService.setTheme;
+  $scope.sideNav = MyService.sideNav;
+
+  $scope.get_account= account.all;
+
+  // $scope.delete = function(accounting){
+  //   account.delete(0);
+  //   console.log(accounting);
+  // }
+
+  $scope.deleteItem = function(cc, key){
+    // itemRef = new Firebase('https://studystupid-49162.firebaseio.com/accounting/');
+    
+    // //$scope.get_account.$remove(id);
+    
+    //console.log($routeParams);
+    
+    // var getKey = itemRef.key();
+
+    // console.log($firebase(itemRef.child('accounting').child(id)).$asObject());
+
+    //itemRef.onDisconnect().update({ pesan: 'I disconnected!' });
+
+
+    // itemRef.update({
+    //   begin: "2210"
+    // });
+   
+  //console.log($routeParams);
+
+
+  }
+
+  // $scope.editItem = function(item){
+    
+  //   $firebase(itemRef).$set({
+  //       id: item.id,
+  //       name : item.name,
+  //       completed: !item.completed
+  //   });
+
+  // }
 
 });
+
+
+
+app.controller('aboutCtrl', function($scope, MyService, $routeParams, $firebase, $location) {
+
+  var userUrl = 'https://studystupid-49162.firebaseio.com/accounting/' + $routeParams.id;
+  var users = MyService;
+
+  $scope.user = new Firebase(userUrl);
+  
+  $scope.updateUser = function () {
+
+    // var names = [];
+    // var keys = users.$getIndex();
+    // keys.forEach(function(key) {
+    //   names.push(users[key].name);
+    // });
+
+  console.log(userUrl);
+  $scope.message = 'User already exists';
+
+
+  };
+
+});
+
+
 
 app.factory('account', ['$firebase',
   function($firebase) {
