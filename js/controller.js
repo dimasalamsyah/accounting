@@ -151,12 +151,20 @@ app.controller("accountingDetailCtrl", function($scope, MyService, account, $fir
 app.controller("accountingDetailEditCtrl", function($scope, MyService, account, $location) {
   $scope.setTheme = MyService.setTheme;
   $scope.accounting = MyService.accounting;
-  console.log(accounting)
-  itemRef = new Firebase('https://studystupid-49162.firebaseio.com/accounting/');
+  var id =MyService.accounting.$id;
+  var url = 'https://studystupid-49162.firebaseio.com/accounting/' +id;
+  editRef = new Firebase(url);
 
   $scope.submit = function(accounting){
-    account.create(accounting);
-    console.log(accounting);
+    editRef.update({
+      begin: MyService.accounting.begin,
+      in_: MyService.accounting.in_,
+      out: MyService.accounting.out,
+      ending: MyService.accounting.ending,
+      note: MyService.accounting.note
+    });
+    //console.log(url);
+    $location.path("/accounting-detail");
   }
 
 
