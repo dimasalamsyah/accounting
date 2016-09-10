@@ -128,8 +128,12 @@ app.controller("accountingDetailCtrl", function($scope, MyService, account, $fir
 
   }
 
-  $scope.editItem = function() {
-    $location.path("/edit");
+  $scope.editItem = function(value) {
+    $location.path("/accounting-detail-edit");
+    console.log(account.edit(value));
+    MyService.accounting = value;
+    //console.log(MyService);
+
   }
 
   // $scope.editItem = function(item){
@@ -144,7 +148,19 @@ app.controller("accountingDetailCtrl", function($scope, MyService, account, $fir
 
 });
 
+app.controller("accountingDetailEditCtrl", function($scope, MyService, account, $location) {
+  $scope.setTheme = MyService.setTheme;
+  $scope.accounting = MyService.accounting;
+  console.log(accounting)
+  itemRef = new Firebase('https://studystupid-49162.firebaseio.com/accounting/');
 
+  $scope.submit = function(accounting){
+    account.create(accounting);
+    console.log(accounting);
+  }
+
+
+});
 
 app.controller('aboutCtrl', function($scope, MyService, $routeParams, $firebase, $location) {
 
@@ -169,12 +185,7 @@ app.controller('aboutCtrl', function($scope, MyService, $routeParams, $firebase,
 
 });
 
-app.controller("accountingDetailEditCtrl", function($scope, MyService, account, $location) {
-  $scope.setTheme = MyService.setTheme;
-  //$location.path("/edit");
 
-
-});
 
 app.factory('account', ['$firebase',
   function($firebase) {
@@ -192,6 +203,9 @@ app.factory('account', ['$firebase',
       },
       delete: function (message) {
         return accounting.$remove(account);
+      },
+      edit: function(value){
+        return value;
       }
     };
 

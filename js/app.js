@@ -43,7 +43,7 @@ app.config(function($routeProvider) {
         templateUrl : "templates/accounting_detail.html",
         controller : "accountingDetailCtrl"
     })
-    .when("/edit", {
+    .when("/accounting-detail-edit", {
         templateUrl : "templates/accounting_detail_edit.html",
         controller : "accountingDetailEditCtrl"
     })
